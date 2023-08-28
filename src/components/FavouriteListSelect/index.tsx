@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { setSelectedLocation } from "../../store/features/locations/locationsSlice";
+import { selectFavouriteLocationsList, setSelectedLocation } from "../../store/features/locations/locationsSlice";
 import styles from "./FavouriteListSelect.module.scss";
 
 function FavouriteListSelect(): JSX.Element {
-  const favouriteList = useAppSelector(
-    (state) => state.locations.favouriteList
-  );
+  const favouriteList = useAppSelector(selectFavouriteLocationsList);
   const [localLocation, setLocalLocation] = useState<string>("");
   const dispatch = useAppDispatch();
 

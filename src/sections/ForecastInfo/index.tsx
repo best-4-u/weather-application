@@ -6,11 +6,10 @@ import LocationSearchInput from "../../components/LocationSearchInput";
 import { useAppSelector } from "../../store/hooks";
 import FavouriteListSelect from "../../components/FavouriteListSelect";
 import { Location } from "../../store/features/locations/types";
+import { selectSelectedLocation } from "../../store/features/locations/locationsSlice";
 
 function ForecastInfo(): JSX.Element {
-  const selectedLocation: Location | null = useAppSelector(
-    (state) => state.locations.selectedLocation
-  );
+  const selectedLocation: Location | null = useAppSelector(selectSelectedLocation);
 
   return (
     <div className={styles.forecast_info}>

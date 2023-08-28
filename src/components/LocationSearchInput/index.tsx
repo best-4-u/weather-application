@@ -5,6 +5,7 @@ import styles from "./LocationSearchInput.module.scss";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchLocations } from "../../store/features/locations/fetchLocations";
 import {
+  selectLocationsList,
   setList,
   setSelectedLocation,
 } from "../../store/features/locations/locationsSlice";
@@ -17,7 +18,7 @@ function LocationSearchInput() {
   const debouncedInput = useDebounce<string>(searchInput, 1000);
 
   const dispatch = useAppDispatch();
-  const locationsList = useAppSelector((state) => state.locations.list);
+  const locationsList = useAppSelector(selectLocationsList);
 
   useEffect(() => {
     if (debouncedInput.length > 0) {

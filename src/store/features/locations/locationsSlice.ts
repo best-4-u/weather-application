@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { LocationsState, Location } from "./types";
 import { fetchLocations } from "./fetchLocations";
+import type { RootState } from '../../store';
 
 const initialState: LocationsState = {
   list: [],
@@ -45,5 +46,10 @@ export const {
   addToFavouriteList,
   removeFromFavouriteList,
 } = locationsSlice.actions;
+
+export const selectLocationsList = (state: RootState) => state.locations.list;
+export const selectFavouriteLocationsList = (state: RootState) => state.locations.favouriteList;
+export const selectSelectedLocation = (state: RootState) => state.locations.selectedLocation;
+
 
 export default locationsSlice.reducer;

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { WeatherState } from "./types";
 import { fetchWeather } from "./fetchWeather";
+import type { RootState } from '../../store';
 
 const initialState: WeatherState = {
   currentWeather: null,
@@ -24,5 +25,8 @@ export const weatherSlice = createSlice({
     });
   },
 });
+
+export const selectWeather = (state: RootState) => state.weather.currentWeather;
+export const selectWeatherStatus = (state: RootState) => state.weather.status;
 
 export default weatherSlice.reducer;

@@ -7,21 +7,18 @@ import { Location } from "../../store/features/locations/types";
 import {
   addToFavouriteList,
   removeFromFavouriteList,
+  selectFavouriteLocationsList,
+  selectSelectedLocation,
 } from "../../store/features/locations/locationsSlice";
 import { fetchWeather } from "../../store/features/weather/fetchWeather";
+import { selectWeather, selectWeatherStatus } from "../../store/features/weather/weatherSlice";
 
 function LocationForecast(): JSX.Element {
-  const weather: Weather | null = useAppSelector(
-    (state) => state.weather.currentWeather
-  );
-  const selectedLocation: Location | null = useAppSelector(
-    (state) => state.locations.selectedLocation
-  );
-  const favouriteLocations: Location[] = useAppSelector(
-    (state) => state.locations.favouriteList
-  );
+  const weather: Weather | null = useAppSelector(selectWeather);
+  const selectedLocation: Location | null = useAppSelector(selectSelectedLocation);
+  const favouriteLocations: Location[] = useAppSelector(selectFavouriteLocationsList);
 
-  const loadingWeather = useAppSelector( (state) => state.weather.status);
+  const loadingWeather = useAppSelector(selectWeatherStatus);
 
   const isInFavouriteList = useMemo(
     () =>
