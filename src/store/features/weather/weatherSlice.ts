@@ -1,29 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "../../store";
-import { Weather } from "./types";
+import { WeatherState } from "./types";
 import { fetchWeather } from "./fetchWeather";
-
-interface WeatherState {
-  currentWeather: Weather | null;
-  status: "idle" | "loading" | "loaded";
-  error: string | null;
-}
 
 const initialState: WeatherState = {
   currentWeather: null,
   status: "idle",
-  error: null
+  error: null,
 };
 
 export const weatherSlice = createSlice({
   name: "weather",
   initialState,
-  reducers: {
-    setWeather: (state, action: PayloadAction<Weather>) => {
-      state.currentWeather = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder.addCase(fetchWeather.pending, (state) => {
       state.status = "loading";
@@ -36,7 +24,5 @@ export const weatherSlice = createSlice({
     });
   },
 });
-
-export const { setWeather } = weatherSlice.actions;
 
 export default weatherSlice.reducer;

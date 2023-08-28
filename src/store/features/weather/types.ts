@@ -24,10 +24,15 @@ export interface Weather {
   daily: Daily;
 }
 
-
 export interface DailyWeatherCard {
   min: number;
   max: number;
   date: string;
   weatherCode: number;
+}
+
+export interface WeatherState {
+  currentWeather: Weather | null;
+  status: "idle" | "loading" | "loaded";
+  error: string | null;
 }

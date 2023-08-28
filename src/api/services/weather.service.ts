@@ -10,10 +10,18 @@ class WeatherService {
   getWeatherByLocation(
     lat: number,
     lon: number,
+    timezone: string,
   ): Promise<AxiosResponse<Weather>> {
-    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const res = http.get<Weather>(
-      `${url}?latitude=${lat}&longitude=${lon}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=${timezone}`
+      `${url}`,
+      {
+        params: {
+          latitude: lat,
+          longitude: lon,
+          timezone,
+          daily: "weathercode,temperature_2m_max,temperature_2m_min"
+        }
+      }
     );
     return res;
   }

@@ -1,34 +1,36 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
-import type { RootState } from '../../store';
-import { LocationsState } from './types';
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { LocationsState, Location } from "./types";
+import { fetchLocations } from "./fetchLocations";
 
 const initialState: LocationsState = {
   list: [],
   fovouriteList: [],
-}
+  status: "idle",
+  selectedLocation: null,
+};
 
 export const locationsSlice = createSlice({
-  name: 'locations',
-  // `createSlice` will infer the state type from the `initialState` argument
+  name: "locations",
   initialState,
   reducers: {
-    increment: (state) => {
-      // state.value += 1
+    setList: (state, action: PayloadAction<Location[]>) => {
+      state.list = action.payload;
     },
-    decrement: (state) => {
-      // state.value -= 1
-    },
-    // Use the PayloadAction type to declare the contents of `action.payload`
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      // state.value += action.payload
+    setSelectedLocation: (state, action: PayloadAction<Location | null>) => {
+      state.selectedLocation = action.payload;
     },
   },
-})
+  extraReducers(builder) {
+    builder.addCase(fetchLocations.pending, (state) => {
+      state.status = "loading";
+    });
 
-export const { increment, decrement, incrementByAmount } = locationsSlice.actions
+    builder.addCase(fetchLocations.fulfilled, (state, { payload }) => {
+      state.list = payload;
+    });
+  },
+});
 
-// Other code such as selectors can use the imported `RootState` type
-export const selectLocations = (state: RootState) => state.locations.list;
+export const { setList, setSelectedLocation } = locationsSlice.actions;
 
-export default locationsSlice.reducer
+export default locationsSlice.reducer;
