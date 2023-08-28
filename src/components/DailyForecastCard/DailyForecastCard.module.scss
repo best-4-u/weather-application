@@ -35,3 +35,10 @@
     }
   }
 }
+
+
+@media only screen and (max-width: 991px) {
+  .daily_forecast_card { 
+    width: 17rem;
+  }
+}

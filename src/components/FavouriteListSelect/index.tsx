@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setSelectedLocation } from "../../store/features/locations/locationsSlice";
 import styles from "./FavouriteListSelect.module.scss";
@@ -19,6 +19,12 @@ function FavouriteListSelect(): JSX.Element {
     );
     if (findLocation !== undefined) dispatch(setSelectedLocation(findLocation));
   };
+
+  useEffect( () => {
+    if (favouriteList.findIndex( (item) => item.id === parseInt(localLocation, 10)) < 0) {
+      setLocalLocation("");
+    }
+  }, [favouriteList, localLocation]);
 
   return (
     <select

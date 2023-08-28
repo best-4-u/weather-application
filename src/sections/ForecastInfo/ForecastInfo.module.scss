@@ -16,5 +16,15 @@
     justify-content: space-between;
     margin: 2rem 0;
     width: 100%;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .forecast_info { 
+    .actions {
+      justify-content: center;
+    }
   }
 }
