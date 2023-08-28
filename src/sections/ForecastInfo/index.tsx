@@ -4,20 +4,25 @@ import EmptyForecast from "../../components/EmptyForecast";
 import LocationForecast from "../../components/LocationForecast";
 import LocationSearchInput from "../../components/LocationSearchInput";
 import { useAppSelector } from "../../store/hooks";
-import { Weather } from "../../store/features/weather/types";
+import FavouriteListSelect from "../../components/FavouriteListSelect";
+import { Location } from "../../store/features/locations/types";
 
 function ForecastInfo(): JSX.Element {
-
-  const currentWeather: Weather | null = useAppSelector((state) => state.weather.currentWeather);
+  const selectedLocation: Location | null = useAppSelector(
+    (state) => state.locations.selectedLocation
+  );
 
   return (
-    <div>
-      <LocationSearchInput />
+    <div className={styles.forecast_info}>
+      <div className={styles.actions}>
+        <LocationSearchInput />
+        <FavouriteListSelect />
+      </div>
+
       <section className={styles.location_info}>
-        {currentWeather === null ? <EmptyForecast /> : <LocationForecast />}
+        {selectedLocation === null ? <EmptyForecast /> : <LocationForecast />}
       </section>
     </div>
-
   );
 }
 

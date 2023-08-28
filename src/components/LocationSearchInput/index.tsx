@@ -8,17 +8,16 @@ import {
   setList,
   setSelectedLocation,
 } from "../../store/features/locations/locationsSlice";
-import { fetchWeather } from "../../store/features/weather/fetchWeather";
+import { Location } from "../../store/features/locations/types";
 
 function LocationSearchInput() {
   const [searchInput, setSearchInput] = useState<string>("");
+  const [tempLocation, setTempLocation] = useState<Location | null>(null);
+
   const debouncedInput = useDebounce<string>(searchInput, 1000);
 
   const dispatch = useAppDispatch();
   const locationsList = useAppSelector((state) => state.locations.list);
-  const selectedLocation = useAppSelector(
-    (state) => state.locations.selectedLocation
-  );
 
   useEffect(() => {
     if (debouncedInput.length > 0) {
@@ -32,15 +31,14 @@ function LocationSearchInput() {
     <Downshift
       onStateChange={(changes) => {
         if (changes.selectedItem != null) {
-          const { latitude, longitude, timezone } = changes.selectedItem;
           dispatch(setSelectedLocation(changes.selectedItem));
-          dispatch(fetchWeather({ lat: latitude, lon: longitude, timezone }));
+          setTempLocation(changes.selectedItem);
         } else if (changes.inputValue != null) {
           setSearchInput(changes.inputValue);
-          dispatch(setSelectedLocation(null));
+          setTempLocation(null);
         }
       }}
-      selectedItem={selectedLocation}
+      selectedItem={tempLocation}
       itemToString={(item) => (item ? item.name : searchInput)}
     >
       {({
@@ -53,7 +51,7 @@ function LocationSearchInput() {
       }) => (
         <div className={styles.search_combobox}>
           <input
-            {...getInputProps({ placeholder: "search location" })}
+            {...getInputProps({ placeholder: "Search for the location" })}
             className={styles.input}
           />
           <div style={{ position: "relative" }}>

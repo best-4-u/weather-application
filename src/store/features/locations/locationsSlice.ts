@@ -4,7 +4,7 @@ import { fetchLocations } from "./fetchLocations";
 
 const initialState: LocationsState = {
   list: [],
-  fovouriteList: [],
+  favouriteList: [],
   status: "idle",
   selectedLocation: null,
 };
@@ -19,6 +19,14 @@ export const locationsSlice = createSlice({
     setSelectedLocation: (state, action: PayloadAction<Location | null>) => {
       state.selectedLocation = action.payload;
     },
+    addToFavouriteList: (state, action: PayloadAction<Location>) => {
+      state.favouriteList.push(action.payload);
+    },
+    removeFromFavouriteList: (state, action: PayloadAction<number>) => {
+      state.favouriteList = state.favouriteList.filter(
+        (item) => item.id !== action.payload
+      );
+    },
   },
   extraReducers(builder) {
     builder.addCase(fetchLocations.pending, (state) => {
@@ -31,6 +39,11 @@ export const locationsSlice = createSlice({
   },
 });
 
-export const { setList, setSelectedLocation } = locationsSlice.actions;
+export const {
+  setList,
+  setSelectedLocation,
+  addToFavouriteList,
+  removeFromFavouriteList,
+} = locationsSlice.actions;
 
 export default locationsSlice.reducer;

@@ -26,7 +26,7 @@ export interface LocationApiRes {
 
 export interface LocationsState {
   list: Location[];
-  fovouriteList: Location[];
+  favouriteList: Location[];
   status: "idle" | "loading" | "loaded";
   selectedLocation: Location | null;
 }

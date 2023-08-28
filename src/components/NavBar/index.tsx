@@ -8,7 +8,7 @@ function NavBar(): JSX.Element {
       <div className={styles.nav_elements}>
         <ul>
           <li>
-            <NavLink to="/forecast"> Forecast </NavLink>
+            <NavLink to="/forecast"> My Forecast </NavLink>
           </li>
         </ul>
       </div>
