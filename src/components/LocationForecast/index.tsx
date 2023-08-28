@@ -21,6 +21,8 @@ function LocationForecast(): JSX.Element {
     (state) => state.locations.favouriteList
   );
 
+  const loadingWeather = useAppSelector( (state) => state.weather.status);
+
   const isInFavouriteList = useMemo(
     () =>
       favouriteLocations.findIndex(
@@ -71,6 +73,12 @@ function LocationForecast(): JSX.Element {
 
     return res;
   }, [weather]);
+
+
+  if (loadingWeather === 'loading') {
+    return <div> Loading data... </div>
+  }
+
 
   return (
     <div className={styles.location_forecast}>
