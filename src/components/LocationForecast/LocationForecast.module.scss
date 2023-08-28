@@ -1,0 +1,22 @@
+.location_forecast {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .location_header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .coordinates {
+    span {
+      font-weight: 600;
+    }
+  }
+
+  .cards_container {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+}

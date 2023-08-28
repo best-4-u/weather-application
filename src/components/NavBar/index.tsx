@@ -1,8 +1,18 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+import styles from "./NavBar.module.scss";
 
 function NavBar(): JSX.Element {
   return (
-    <div> NavBar </div>
+    <nav className={styles.navbar}>
+      <div className={styles.nav_elements}>
+        <ul>
+          <li>
+            <NavLink to="/forecast"> Forecast </NavLink>
+          </li>
+        </ul>
+      </div>
+    </nav>
   );
 }
 

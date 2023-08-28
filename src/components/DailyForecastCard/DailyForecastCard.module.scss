@@ -1,0 +1,34 @@
+.daily_forecast_card {
+  width: 17rem;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 4px;
+
+  > p {
+    text-align: center;
+  }
+
+  > img {
+    width: 10rem;
+    height: 10rem;
+    margin: auto;
+  }
+
+  .temp_footer {
+    display: flex;
+    justify-content: space-between;
+
+    > div {
+      > p {
+        text-align: center;
+
+        > span::before {
+          content: "\A";
+          white-space: pre;
+        }
+      }
+    }
+  }
+}

@@ -14,6 +14,7 @@
   },
   "rules": {
     "no-console": "off",
+    "no-plusplus": "off",
     "import/prefer-default-export": "off",
     "@typescript-eslint/camelcase": ["off"],
     "camelcase": ["off"],
@@ -30,6 +31,7 @@
         "extensions": [".js", ".jsx", ".tsx", ".ts"]
       }
     ],
+    "class-methods-use-this": "off",
     "max-len": [
       "warn",
       {
@@ -43,6 +45,12 @@
         "ignoreTemplateLiterals": true,
         "ignoreRegExpLiterals": true
       }
-    ]
+    ],
+    "no-param-reassign": ["error", {
+      "props": true,
+      "ignorePropertyModificationsFor": [
+        "state"
+      ]
+    }]
   }
 }

@@ -1,0 +1,10 @@
+@import "../../App/variables";
+
+.location_info {
+  padding: 2rem;
+  margin-top: 2rem;
+  min-height: 30rem;
+  display: flex;
+  border-radius: 4px;
+  background-color: $background_color;
+}
